@@ -12,7 +12,13 @@ class TrelloNotifier implements NotifierInterface
         $apiKey = $options['trello_apikey'] ?? '';
         $token = $options['trello_token'] ?? '';
         $listId = $to;
+        $cta_link = admin_url('admin.php?page=gestor-renovaciones');
+        $cta_text = 'Gestionar Licencia';
 
+        if (!empty($licenseData->url_renovacion)) {
+            $cta_link = $licenseData->url_renovacion;
+            $cta_text = 'Renovar Licencia Ahora';
+        }
         if (empty($apiKey) || empty($token) || empty($listId)) return false;
 
         $card_title = "[{$licenseData->site_name}]🚨 Renovación: {$licenseData->nombre_software} (Vence en {$licenseData->days_left} días)";
@@ -28,6 +34,7 @@ class TrelloNotifier implements NotifierInterface
         ---
         **Acción Requerida:** Contactar al responsable y proceder con el pago de la renovación.
         ";
+        $raw_description .= "\n\n**[➡️ {$cta_text}]({$cta_link})**";
         $card_description = preg_replace('/^\s+/m', '', $raw_description);
         $url = 'https://api.trello.com/1/cards';
         $args = [
