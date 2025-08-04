@@ -1,0 +1,12 @@
+.status-vencido {
+    color: #a00!important;
+    font-weight: bold!important;
+}
+
+.status-urgente {
+    color: #d9534f!important;
+}
+
+.status-ok {
+    color: inherit!important;
+}

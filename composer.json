@@ -1,0 +1,11 @@
+{
+    "name": "solidaridad/gestor-renovaciones",
+    "description": "Un plugin para gestionar y automatizar la renovación de licencias.",
+    "type": "wordpress-plugin",
+    "autoload": {
+        "psr-4": {
+            "GestorRenovaciones\\": "src/"
+        }
+    },
+    "require": {}
+}

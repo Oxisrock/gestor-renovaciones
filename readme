@@ -1,0 +1,71 @@
+# Gestor de Renovaciones de Licencias (WordPress Plugin)
+
+Un plugin para WordPress diseñado para centralizar y automatizar el seguimiento y la notificación de renovaciones de licencias de software, eliminando el riesgo de interrupciones de servicio y recargos por demora.
+
+## Problema que Resuelve
+
+En muchos equipos, las licencias de software (Elementor, Asana, HubSpot, etc.) se gestionan en hojas de cálculo manuales. Este método es propenso a errores humanos y olvidos, lo que puede causar que servicios críticos dejen de funcionar. Este plugin reemplaza ese proceso frágil por un sistema robusto, proactivo y automatizado.
+
+## Características
+
+- **Gestión Centralizada:** Interfaz CRUD (Crear, Leer, Actualizar, Eliminar) completa para todas las licencias dentro del panel de WordPress.
+- **Automatización Diaria:** Una tarea programada (WP-Cron) se ejecuta cada 24 horas para verificar las licencias que están próximas a vencer.
+- **Notificaciones Multicanal:** Envía alertas a los responsables a través de múltiples plataformas para asegurar que el mensaje sea recibido.
+  - 📧 **Email:** Notificaciones detalladas en formato HTML.
+  - 💬 **Slack:** Mensajes concisos y directos a un canal específico.
+  - 📋 **Trello:** Creación automática de tarjetas en un tablero y lista definidos.
+- **Arquitectura Extensible:** Diseñado con interfaces y patrones de diseño que facilitan la integración de nuevos canales de notificación en el futuro (ej. Telegram).
+- **A Prueba de Duplicados:** Incluye un mecanismo de bloqueo ("transient lock") para evitar el envío de notificaciones duplicadas si el cron se ejecuta varias veces.
+
+---
+
+## Instalación
+
+1.  Clona este repositorio en tu carpeta de `/wp-content/plugins/`.
+    ```bash
+    git clone [https://github.com/Oxisrock/gestor-renovaciones.git](https://github.com/Oxisrock/gestor-renovaciones.git)
+    ```
+2.  Navega hasta el directorio del plugin desde tu terminal.
+    ```bash
+    cd gestor-renovaciones
+    ```
+3.  Instala las dependencias y genera el autoloader con Composer.
+    ```bash
+    composer install
+    ```
+4.  Ve al panel de administración de WordPress, a la sección "Plugins", y activa el plugin "Gestor de Renovaciones".
+
+---
+
+## Configuración Paso a Paso
+
+Una vez activado, verás una nueva opción en el menú principal de WordPress llamada **"Gestor de Licencias"**.
+
+### Paso 1: Añade tus Licencias
+
+1.  Ve a **Gestor de Licencias** en el menú de WordPress.
+2.  Utiliza el formulario **"Añadir Nueva Licencia"** para registrar cada uno de tus softwares, especificando la fecha de renovación, el monto y el email del responsable.
+3.  Todas las licencias que añadas aparecerán listadas en la tabla inferior. Desde allí podrás **Editarlas** o **Eliminarlas**.
+
+### Paso 2: Configura los Canales de Notificación
+
+1.  Ve a **Gestor de Licencias -> Ajustes**.
+2.  Rellena los campos para los servicios que desees activar. Si dejas un campo vacío, las notificaciones para ese servicio no se enviarán.
+
+#### 📧 Email
+- No requiere configuración. Utiliza el sistema de envío de correos de WordPress por defecto.
+- **Recomendación:** Para asegurar que los correos no lleguen a spam, se recomienda usar un plugin de SMTP (como "WP Mail SMTP") para enviar los correos a través de un servicio profesional (Gmail, SendGrid, etc.).
+
+#### 💬 Slack
+1.  **Obtén tu URL de Webhook:** Sigue la [guía oficial de Slack](https://api.slack.com/messaging/webhooks) para crear un "Incoming Webhook" en el canal que elijas.
+2.  **Pega la URL:** Copia la URL del webhook (empieza con `https://hooks.slack.com/...`) y pégala en el campo "URL del Webhook" en la página de ajustes.
+3.  Guarda los cambios.
+
+#### 📋 Trello
+1.  **Obtén tus Credenciales:**
+    -   **API Key y Token:** Ve a [https://trello.com/app-key](https://trello.com/app-key), copia tu clave y genera un token.
+    -   **ID de la Lista:** Abre una tarjeta de la lista donde quieres que se creen las alertas, añade `.json` al final de la URL, y busca el valor de `"idList"`.
+2.  **Pega las Credenciales:** Rellena los tres campos (API Key, API Token, ID de la Lista) en la página de ajustes.
+3.  Guarda los cambios.
+
+¡Y eso es todo! El sistema se ejecutará automáticamente cada día y enviará las notificaciones a todos los canales que hayas configurado.

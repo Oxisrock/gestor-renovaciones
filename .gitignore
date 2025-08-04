@@ -1,0 +1,19 @@
+# Archivos de dependencias (se instalan con 'composer install')
+/vendor/
+/node_modules/
+.htaccess
+debug.log
+error_log
+
+# Archivos de compilación o de sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de editores de código
+.vscode/
+.idea/
+
+# Archivos comprimidos y otros archivos temporales
+*.zip
+*.rar
+*.tar.gz
