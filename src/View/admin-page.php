@@ -22,6 +22,10 @@ $is_editing = isset($editable_license) && $editable_license !== null;
                     <td><input name="nombre_software" type="text" id="nombre_software" class="regular-text" value="<?php echo $is_editing ? esc_attr($editable_license->nombre_software) : ''; ?>" required></td>
                 </tr>
                 <tr>
+                    <th scope="row"><label for="url_renovacion">URL de Renovación (Opcional)</label></th>
+                    <td><input name="url_renovacion" type="url" id="url_renovacion" class="regular-text" value="<?php echo $is_editing ? esc_attr($editable_license->url_renovacion) : ''; ?>"></td>
+                </tr>
+                <tr>
                     <th scope="row"><label for="fecha_renovacion">Fecha de Renovación</label></th>
                     <td><input name="fecha_renovacion" type="date" id="fecha_renovacion" value="<?php echo $is_editing ? esc_attr($editable_license->fecha_renovacion) : ''; ?>" required></td>
                 </tr>

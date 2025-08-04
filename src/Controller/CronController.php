@@ -75,6 +75,7 @@ class CronController
 
             $licenseData = (object)[
                 'nombre_software'   => $license->nombre_software,
+                'url_renovacion' => $license->url_renovacion,
                 'fecha_renovacion'  => $license->fecha_renovacion,
                 'days_left'         => $days_left,
                 'monto_pagar'       => $license->monto_pagar,

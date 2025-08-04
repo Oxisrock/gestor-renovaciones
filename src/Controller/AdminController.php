@@ -111,6 +111,7 @@ class AdminController
 
         $data = [
             'nombre_software'   => sanitize_text_field($_POST['nombre_software']),
+            'url_renovacion'       => esc_url_raw($_POST['url_renovacion']),
             'fecha_renovacion'  => sanitize_text_field($_POST['fecha_renovacion']),
             'monto_pagar'       => floatval($_POST['monto_pagar']),
             'responsable_email' => sanitize_email($_POST['responsable_email']),

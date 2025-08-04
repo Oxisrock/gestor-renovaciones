@@ -19,6 +19,7 @@ class LicenseModel
         $sql = "CREATE TABLE $tableName (
             id mediumint(9) NOT NULL AUTO_INCREMENT,
             nombre_software varchar(255) NOT NULL,
+            url_renovacion varchar(255) DEFAULT NULL,
             fecha_renovacion date NOT NULL,
             monto_pagar decimal(10, 2) NOT NULL,
             responsable_email varchar(255) NOT NULL,
